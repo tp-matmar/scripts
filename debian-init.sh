@@ -45,4 +45,4 @@ rm /etc/update-motd.d/*
 echo "welcome back" > /etc/motd
 echo -e '#!/bin/bash\nlast -f /var/log/wtmp | head -n2' > /etc/update-motd.d/11-lastlogin && chmod +x /etc/update-motd.d/11-lastlogin 
 # source configs
-source ~/.zshrc
+zsh && source ~/.zshrc
