@@ -15,8 +15,11 @@ chsh -s $(which zsh)
 sh -c "$(curl -fsSL 	https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 ## config zsh
-zsh_theme=$(cat .zshrc | grep -oE "^ZSH_THEME=.*$" | cut -d'"' -f2) 
-sed -i "s/$zsh_theme/cypher/g" ~/.zshrc
+all_themes=$(ls ~/.oh-my-zsh/themes | cut -d"." -f1)
+new_random_theme=$(echo $all_themes | xargs shuf -n1 -e)
+
+zsh_default_theme=$(cat .zshrc | grep -oE "^ZSH_THEME=.*$" | cut -d'"' -f2) 
+sed -i "s/$zsh_default_theme/$new_random_theme/g" ~/.zshrc
 
 ## add aliases
 echo "alias zshrc='vim ~/.zshrc; source ~/.zshrc'" >> ~/.zshrc
