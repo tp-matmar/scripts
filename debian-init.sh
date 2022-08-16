@@ -17,8 +17,7 @@ sh -c "$(curl -fsSL 	https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/to
 ## config zsh
 all_themes=$(ls ~/.oh-my-zsh/themes | cut -d"." -f1)
 new_random_theme=$(echo $all_themes | xargs shuf -n1 -e)
-
-zsh_default_theme=$(cat .zshrc | grep -oE "^ZSH_THEME=.*$" | cut -d'"' -f2) 
+zsh_default_theme=$(/bin/cat ~/.zshrc | grep -oE "^ZSH_THEME=.*$" | cut -d'"' -f2) 
 sed -i "s/$zsh_default_theme/$new_random_theme/g" ~/.zshrc
 
 ## add aliases
