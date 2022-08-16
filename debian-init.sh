@@ -35,7 +35,7 @@ echo -e '#!/bin/bash\nwhile [ : ]; do $@; sleep 1; clear;sleep 0.02; done' > /us
 ## plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-zsh_plugins=$(cat .zshrc | grep -oE "^plugins=.*$" | cut -d'(' -f2) 
+zsh_plugins=$(cat ~/.zshrc | grep -oE "^plugins=.*$" | cut -d'(' -f2) 
 sed -i "s/$zsh_plugins/zsh-autosuggestions zsh-syntax-highlighting)/g" ~/.zshrc
 
 # config vim
