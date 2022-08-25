@@ -12,7 +12,7 @@ apt install zsh git curl vim bat -y
 
 # installing ohmyzsh	
 chsh -s $(which zsh)
-sh -c "$(curl -fsSL 	https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 ## config zsh
 all_themes=$(ls ~/.oh-my-zsh/themes | cut -d"." -f1)
@@ -27,7 +27,7 @@ echo "alias grep='grep --color=auto'" >> ~/.zshrc
 echo "alias grep-ip='grep -oE '\''(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'\'" >> ~/.zshrc
 echo "alias config=\"grep -v '#' | grep -v '^$'\"" >> ~/.zshrc
 echo "alias cat='batcat --color=always --paging=never -p'" >> ~/.zshrc
-echo "alias random_zsh_theme='base64 -d <<< c2VkIC1pICJzX2AvYmluL2NhdCB+Ly56c2hyYyB8IGdyZXAgLW9FICdeWlNIX1RIRU1FPS4qJCcgfCBjdXQgLWQnIicgLWYyYF8kKGVjaG8gYGxzIH4vLm9oLW15LXpzaC90aGVtZXMgfCBjdXQgLWQiLiIgLWYxYCB8IHhhcmdzIHNodWYgLW4xIC1lKV9nIiB+Ly56c2hyYwo= | zsh && source ~/.zshrc"
+echo "alias random_zsh_theme='base64 -d <<< c2VkIC1pICJzX2AvYmluL2NhdCB+Ly56c2hyYyB8IGdyZXAgLW9FICdeWlNIX1RIRU1FPS4qJCcgfCBjdXQgLWQnIicgLWYyYF8kKGVjaG8gYGxzIH4vLm9oLW15LXpzaC90aGVtZXMgfCBjdXQgLWQiLiIgLWYxYCB8IHhhcmdzIHNodWYgLW4xIC1lKV9nIiB+Ly56c2hyYwo= | zsh && source ~/.zshrc'"
 #or use ZSH_THEME="random" to get new theme every source of zshrc
 
 
