@@ -1,5 +1,10 @@
 #!/bin/bash
 ### matmar shell install and config
+
+#TOdo:
+	# add vi mode selection
+	# add F2 function for listcars in vimrc
+##
 read -p '[?] Run init script (zsh config and plugins, aliases and scripts) (Y/n) ' -n 1 -r; echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
