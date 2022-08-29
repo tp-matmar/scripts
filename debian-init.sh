@@ -1,22 +1,21 @@
 #!/bin/bash
 ### matmar shell install and config
 
-#TOdo:
-	# add vi mode selection
-	# add F2 function for listcars in vimrc
-##
 read -p '[?] Run init script (zsh config and plugins, aliases and scripts) (Y/n) ' -n 1 -r; echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     exit
 fi
 
+#emacs vs vi
+read -p '[?] emacs or vi (E/v) ' -n 1 -r; echo
+
 apt update -y && apt upgrade -y
 # install packages i use
 apt install zsh git curl vim bat -y
 
 # installing ohmyzsh	
-chsh -s $(which zsh)
+#chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 ## config zsh
@@ -41,14 +40,29 @@ echo -e '#!/bin/bash\ncurl -s cheat.sh/$1' > /usr/local/sbin/cheat && chmod +x /
 echo -e '#!/bin/bash\nwhile [ : ]; do $@; sleep 1; clear;sleep 0.02; done' > /usr/local/sbin/loop && chmod +x /usr/local/sbin/loop
 
 ## plugins
+zsh_plugins=$(/bin/cat ~/.zshrc | grep -oE "^plugins=.*$" | cut -d'(' -f2) 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-zsh_plugins=$(/bin/cat ~/.zshrc | grep -oE "^plugins=.*$" | cut -d'(' -f2) 
-sed -i "s/$zsh_plugins/zsh-autosuggestions zsh-syntax-highlighting)/g" ~/.zshrc
+
+# install vi mode, or don't
+if [[ $REPLY =~ ^[Vv]$ ]]
+then
+	#vi
+	git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+	sed -i "s/$zsh_plugins/zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)/g" ~/.zshrc
+else
+	#emacs
+	sed -i "s/$zsh_plugins/zsh-autosuggestions zsh-syntax-highlighting)/g" ~/.zshrc
+fi
 
 # config vim
 echo "set number relativenumber" > ~/.vimrc
 echo "syntax on" >> ~/.vimrc
+echo "set listchars=eol:↓,tab:\ \ ┊,trail:●,extends:…,precedes:…,space:·" >> ~/.vimrc
+echo "nmap <F2> :set invlist<CR>" >> ~/.vimrc
+echo "imap <F2> <ESC>:set invlist<CR>" >> ~/.vimrc
+
+
 
 # motd
 rm /etc/update-motd.d/*
